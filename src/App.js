@@ -7,6 +7,7 @@ import MovieCarousel from "./components/MovieCarousel";
 import Footer from "./components/Footer";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MovieDetails from "./components/MovieDetails";
+import BackOffice from "./components/BackOffice";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           />
           <Route element={<h1>TV Shows</h1>} path="/tvshows" />
           <Route element={<MovieDetails />} path="/moviedetails/:movieID" />
+          <Route element={<BackOffice />} path="/backoffice" />
           <Route element={<h1>404 Page Not Found</h1>} path="*" />
         </Routes>
         <Footer />
