@@ -19,9 +19,7 @@ function App() {
             element={
               <>
                 <GenreBar />
-                <MovieCarousel moviesToShow="Sherlock Holmes" />
-                <MovieCarousel moviesToShow="Harry Potter" />
-                <MovieCarousel moviesToShow="The Lord of the Rings" />
+                <MovieCarousel />
               </>
             }
           />

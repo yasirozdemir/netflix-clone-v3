@@ -17,11 +17,11 @@ const MovieDetails = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
 
-  const url = "http://www.omdbapi.com/?apikey=83cb8cba&i=";
+  const url = process.env.REACT_APP_API_URL;
 
   const fetchMovieToShow = async () => {
     try {
-      const response = await fetch(url + movieID);
+      const response = await fetch(url + "/medias/" + movieID);
       if (response.ok) {
         const rawMovie = await response.json();
         setMovie(rawMovie);
@@ -53,48 +53,48 @@ const MovieDetails = () => {
         <Row>
           <Col>
             <h3>
-              {movie.Title} ({movie.Year})
+              {movie.title} ({movie.year})
             </h3>
           </Col>
         </Row>
         <Row className="mt-3">
           <Col className="mx-auto" md={6} lg={4}>
-            <img src={movie.Poster} alt="movie poster" className="w-75" />
+            <img src={movie.poster} alt="movie poster" className="w-75" />
           </Col>
-          <Col md={12} lg={8}>
+          {/* <Col md={12} lg={8}>
             <ListGroup variant="flush" id="movieDataList">
               <ListGroup.Item>
                 <span className="mr-2">Genre:</span>
-                <span className="ml-auto">{movie.Genre}</span>
+                <span className="ml-auto">{movie.genre}</span>
               </ListGroup.Item>
               <ListGroup.Item>
                 <span className="mr-2">Released:</span>
-                <span className="ml-auto">{movie.Released}</span>
+                <span className="ml-auto">{movie.released}</span>
               </ListGroup.Item>
               <ListGroup.Item>
                 <span className="mr-2">Country:</span>
-                <span className="ml-auto">{movie.Country}</span>
+                <span className="ml-auto">{movie.country}</span>
               </ListGroup.Item>
               <ListGroup.Item>
                 <span className="mr-2">Writer(s):</span>
-                <span className="ml-auto">{movie.Writer}</span>
+                <span className="ml-auto">{movie.writer}</span>
               </ListGroup.Item>
               {movie.Director !== "N/A" && (
                 <ListGroup.Item>
                   <span className="mr-2">Director(s):</span>
-                  <span className="ml-auto">{movie.Director}</span>
+                  <span className="ml-auto">{movie.director}</span>
                 </ListGroup.Item>
               )}
               <ListGroup.Item>
                 <span className="mr-2">Actors:</span>
-                <span className="ml-auto">{movie.Actors}</span>
+                <span className="ml-auto">{movie.actors}</span>
               </ListGroup.Item>
               <ListGroup.Item>
                 <span className="mr-2">IMDB Rate:</span>
                 <span className="ml-auto">{movie.imdbRating}</span>
               </ListGroup.Item>
             </ListGroup>
-          </Col>
+          </Col> */}
         </Row>
         {/* <Row>
           <Col>

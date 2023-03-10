@@ -4,22 +4,20 @@ import { BiLike } from "react-icons/bi";
 import { FiChevronDown } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 
-const SingleMovie = (props) => {
+const SingleMovie = ({ movieObj }) => {
   const navigate = useNavigate();
-  const imdbID = props.movieObj.imdbID;
 
   return (
     <>
       <img
-        key={props.movieObj.imbdID}
-        src={props.movieObj.Poster}
-        alt={props.movieObj.Title}
+        src={movieObj.poster}
+        alt={movieObj.title}
         className="w-100 rounded-sm"
       />
       <div className="overlay d-flex flex-column justify-content-between">
         <div>
-          <h4>{props.movieObj.Title}</h4>
-          <h6>{props.movieObj.Year}</h6>
+          <h4>{movieObj.title}</h4>
+          <h6>{movieObj.year}</h6>
         </div>
         <div className="d-flex align-items-center justify-content-start">
           <button>
@@ -34,7 +32,7 @@ const SingleMovie = (props) => {
           </button>
           <button
             className="ml-auto"
-            onClick={() => navigate("/moviedetails/" + imdbID)}
+            onClick={() => navigate("/moviedetails/" + movieObj.id)}
           >
             <FiChevronDown />
           </button>

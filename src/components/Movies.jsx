@@ -5,7 +5,6 @@ import SingleMovie from "./SingleMovie";
 class Movies extends Component {
   state = {
     url: process.env.REACT_APP_API_URL,
-    moviesToShow: this.props.moviesToShow,
     movies: [],
     isError: false,
     isLoading: true,
@@ -15,13 +14,9 @@ class Movies extends Component {
 
   getMovies = async () => {
     try {
-      const response = await fetch(this.state.url + this.state.moviesToShow, {
-        method: "GET",
-      });
+      const response = await fetch(this.state.url + "/medias");
       if (response.ok) {
-        const moviesDataRaw = await response.json();
-        const moviesData = moviesDataRaw.Search;
-
+        const moviesData = await response.json();
         this.setState({
           ...this.state,
           movies: moviesData,
@@ -58,14 +53,14 @@ class Movies extends Component {
           </Alert>
         )}
         <Row className="no-gutters justify-content-center">
-          {this.state.movies.splice(0, 5).map((movieObj) => {
+          {this.state.movies?.map((movieObj) => {
             return (
               <Col
                 xs={8}
                 sm={5}
                 md={3}
                 lg={2}
-                key={movieObj.imdbID}
+                key={movieObj.id}
                 className="movieCard mx-1 mb-2"
               >
                 {this.state.isLoading && (
