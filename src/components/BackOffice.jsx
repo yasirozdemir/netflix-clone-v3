@@ -13,37 +13,42 @@ const BackOffice = () => {
 
   const postMedia = async () => {
     try {
-      const newMedia = {
-        title: title,
-        year: year,
-        type: type,
-        poster: "",
-      };
-      const res = await fetch(url + "/medias", {
-        method: "POST",
-        body: JSON.stringify(newMedia),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      if (res.ok) {
-        const resMessage = await res.json();
-        const mediaId = resMessage.mediaId;
-        const res2 = await fetch(url + "/medias/" + mediaId + "/poster", {
+      if (imgData) {
+        const newMedia = {
+          title: title,
+          year: year,
+          type: type,
+          poster: "",
+        };
+        const res = await fetch(url + "/medias", {
           method: "POST",
-          body: imgData,
+          body: JSON.stringify(newMedia),
+          headers: {
+            "Content-Type": "application/json",
+          },
         });
-        if (res2.ok) {
-          setImgData(null);
-          setTitle("");
-          setYear("");
-          setType("");
+        if (res.ok) {
+          const resMessage = await res.json();
+          const mediaId = resMessage.mediaId;
+          const res2 = await fetch(url + "/medias/" + mediaId + "/poster", {
+            method: "POST",
+            body: imgData,
+          });
+          if (res2.ok) {
+            setImgData(null);
+            setTitle("");
+            setYear("");
+            setType("");
+          } else {
+            setErrMsg("Oops! An error occurred related to your poster :(");
+            setIsError(true);
+          }
         } else {
-          setErrMsg("Oops! An error occurred related to your poster :(");
+          setErrMsg("Oops! An error occurred related to your media content :(");
           setIsError(true);
         }
       } else {
-        setErrMsg("Oops! An error occurred related to your media content :(");
+        setErrMsg("You should set a poster to be able to post a new media!");
         setIsError(true);
       }
     } catch (error) {
