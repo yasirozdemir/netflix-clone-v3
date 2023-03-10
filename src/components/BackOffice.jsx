@@ -42,6 +42,7 @@ const BackOffice = () => {
           });
           if (res2.ok) {
             setImgData(null);
+            setImgName(null);
             setTitle("");
             setYear("");
             setType("");
