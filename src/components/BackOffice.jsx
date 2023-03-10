@@ -115,7 +115,7 @@ const BackOffice = () => {
               />
             </Form.Group>
             <Form.Group className="d-flex justify-content-center align-items-start mb-3">
-              <div className="mr-3">
+              <div className="mr-3 d-flex flex-column justify-content-center align-items-center">
                 <button
                   type="button"
                   onClick={imitateInputTypeFile}
@@ -130,7 +130,14 @@ const BackOffice = () => {
                   </svg>
                   <span className="ml-2">Pick a Poster</span>
                 </button>
-                {imgName && <p className="text-success">{imgName}</p>}
+                {imgName && (
+                  <p
+                    className="text-success text-truncate"
+                    style={{ maxWidth: "120px" }}
+                  >
+                    {imgName}
+                  </p>
+                )}
                 <input
                   type="file"
                   className="d-none"
