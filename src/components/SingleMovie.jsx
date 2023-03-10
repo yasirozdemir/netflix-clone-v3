@@ -21,21 +21,11 @@ const SingleMovie = ({ movieObj }) => {
         </div>
         <div className="d-flex align-items-center justify-content-start">
           <button>
-            {" "}
             <BsPlayFill />
           </button>
-          <a
-            href={
-              process.env.REACT_APP_API_URL +
-              "/medias/" +
-              movieObj.id +
-              "/pdf/download"
-            }
-          >
-            <button className="ml-2">
-              <AiOutlinePlus />
-            </button>
-          </a>
+          <button className="ml-2">
+            <AiOutlinePlus />
+          </button>
           <button className="ml-2">
             <BiLike />
           </button>

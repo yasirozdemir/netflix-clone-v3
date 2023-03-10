@@ -59,7 +59,28 @@ const MovieDetails = () => {
         </Row>
         <Row className="mt-3">
           <Col className="mx-auto" md={6} lg={4}>
-            <img src={movie.poster} alt="movie poster" className="w-75" />
+            <div className="d-flex flex-column justify-content-center align-items-center">
+              <img src={movie.poster} alt="movie poster" className="w-75" />
+              <a
+                className="mt-2 downloadLink"
+                style={{
+                  border: "1px solid white",
+                  padding: "0.25rem 0.5rem",
+                  borderRadius: "0.4rem",
+                  color: "white",
+                  textDecoration: "none",
+                  transition: "all 150ms",
+                }}
+                href={
+                  process.env.REACT_APP_API_URL +
+                  "/medias/" +
+                  movie.id +
+                  "/pdf/download"
+                }
+              >
+                Download PDF
+              </a>
+            </div>
           </Col>
           {/* <Col md={12} lg={8}>
             <ListGroup variant="flush" id="movieDataList">
