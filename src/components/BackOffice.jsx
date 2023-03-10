@@ -1,32 +1,15 @@
 import { useState } from "react";
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { Alert, Button, Col, Container, Form, Row } from "react-bootstrap";
 
 const BackOffice = () => {
   const [title, setTitle] = useState("");
   const [year, setYear] = useState("");
   const [type, setType] = useState("");
   const [imgData, setImgData] = useState(null);
+  const [isError, setIsError] = useState(false);
+  const [errMsg, setErrMsg] = useState("");
 
   const url = process.env.REACT_APP_API_URL;
-
-  const setMediaPoster = async (mediaId) => {
-    try {
-      const res = await fetch(url + "/medias/" + mediaId + "/poster", {
-        method: "POST",
-        body: imgData,
-      });
-      if (res.ok) {
-        setImgData(null);
-        setTitle("");
-        setYear("");
-        setType("");
-      } else {
-        console.log("error when uploading the poster!");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const postMedia = async () => {
     try {
@@ -46,12 +29,26 @@ const BackOffice = () => {
       if (res.ok) {
         const resMessage = await res.json();
         const mediaId = resMessage.mediaId;
-        await setMediaPoster(mediaId);
+        const res2 = await fetch(url + "/medias/" + mediaId + "/poster", {
+          method: "POST",
+          body: imgData,
+        });
+        if (res2.ok) {
+          setImgData(null);
+          setTitle("");
+          setYear("");
+          setType("");
+        } else {
+          setErrMsg("Oops! An error occurred related to your poster :(");
+          setIsError(true);
+        }
       } else {
-        console.log("error posting a new media!");
+        setErrMsg("Oops! An error occurred related to your media content :(");
+        setIsError(true);
       }
     } catch (error) {
-      console.log(error);
+      setErrMsg("Oops! An error occurred related to POST operation :(");
+      setIsError(true);
     }
   };
 
@@ -69,6 +66,7 @@ const BackOffice = () => {
 
   return (
     <Container>
+      {isError && <Alert variant="danger">{errMsg}</Alert>}
       <Row>
         <Col>
           <h2 className="m-0">Welcome to Back Office!</h2>
