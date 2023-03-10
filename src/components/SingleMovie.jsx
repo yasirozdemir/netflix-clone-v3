@@ -24,9 +24,18 @@ const SingleMovie = ({ movieObj }) => {
             {" "}
             <BsPlayFill />
           </button>
-          <button className="ml-2">
-            <AiOutlinePlus />
-          </button>
+          <a
+            href={
+              process.env.REACT_APP_API_URL +
+              "/medias/" +
+              movieObj.id +
+              "/pdf/download"
+            }
+          >
+            <button className="ml-2">
+              <AiOutlinePlus />
+            </button>
+          </a>
           <button className="ml-2">
             <BiLike />
           </button>
