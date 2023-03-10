@@ -4,7 +4,7 @@ import SingleMovie from "./SingleMovie";
 
 class Movies extends Component {
   state = {
-    url: "http://www.omdbapi.com/?i=tt3896198&apikey=83cb8cba&s=",
+    url: process.env.REACT_APP_API_URL,
     moviesToShow: this.props.moviesToShow,
     movies: [],
     isError: false,
